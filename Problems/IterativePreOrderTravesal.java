@@ -27,6 +27,7 @@ public class IterativePreOrderTravesal {
 
             if(root.right != null) st.push(root.right);
             if(root.left != null) st.push(root.left);
+
         }
         return ans;
     }
