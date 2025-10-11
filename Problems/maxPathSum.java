@@ -17,12 +17,12 @@ public class maxPathSum {
         int rightGain = Math.max(maxGain(node.right), 0);
 
         // Price of the path that passes through this node
-        int currentPathSum = node.val + leftGain + rightGain;
+        int currentPathSum = node.data + leftGain + rightGain;
 
         // Update global max if current path is better
         maxSum = Math.max(maxSum, currentPathSum);
 
         // Return the max gain to continue the path upwards
-        return node.val + Math.max(leftGain, rightGain);
+        return node.data + Math.max(leftGain, rightGain);
     }
 }
