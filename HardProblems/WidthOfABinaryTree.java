@@ -7,14 +7,33 @@ import java.util.*;
 class TreeNode {
     int val;
     TreeNode left, right;
-
-    TreeNode(int va) {
+    TreeNode(int val) {
         this.val = val;
+        left = right = null;
+    }
+}
+
+// Custom Pair class (since LeetCode provides it, but local IDE doesn't)
+class Pair<U, V> {
+    private U key;
+    private V value;
+
+    public Pair(U key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public U getKey() {
+        return key;
+    }
+
+    public V getValue() {
+        return value;
     }
 }
 
 public class WidthOfABinaryTree {
-    public int widthOfBinaryTree(TreeNode root) {
+    public static int widthOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
 
         Queue<Pair<TreeNode, Long>> q = new LinkedList<>();
@@ -48,6 +67,14 @@ public class WidthOfABinaryTree {
     }
 
     public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(5);
+        root.left.right = new TreeNode(3);
+        root.right.right = new TreeNode(9);
 
+        int result = widthOfBinaryTree(root);
+        System.out.println("Maximum Width of Binary Tree: " + result);
     }
 }
