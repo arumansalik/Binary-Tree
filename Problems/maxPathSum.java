@@ -1,22 +1,23 @@
 package Problems;
 
 public class maxPathSum {
+    static int maxSum;
+
     public static int maxpathSum(Node root) {
-        int[] maxValue = new int[1];
-        maxValue[0] = Integer.MIN_VALUE;
-        maxPathDown(root, maxValue);
-        return maxValue[0];
+        maxSum = Integer.MIN_VALUE;
+        dfs(root);
+        return maxSum;
     }
 
-    private static int maxPathDown(Node node, int[] maxValue) {
-        if(node == null) return 0;
+    private static int dfs(Node root) {
+        if(root == null) return 0;
 
-        int left = Math.max(0, maxPathDown(node.left, maxValue));
-        int right = Math.max(0, maxPathDown(node.right,maxValue));
+        int left = Math.max(0, dfs(root.left));
+        int right = Math.max(0, dfs(root.right));
 
-        maxValue[0] = Math.max(maxValue[0], left + right + node.data);
+        maxSum = Math.max(maxSum, left + right + root.data);
 
-        return Math.max(left, right) + node.data;
+        return root.data + Math.max(left, right);
     }
 
     public static void main(String[] args) {

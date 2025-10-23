@@ -48,6 +48,6 @@ public class PerfectBinaryTree {
             System.out.println("True");
         } else {
             System.out.println("False");
-        }git
+        }
     }
 }
