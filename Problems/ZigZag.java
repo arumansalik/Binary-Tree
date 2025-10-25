@@ -1,5 +1,6 @@
 package Problems;
 
+import java.lang.runtime.ObjectMethods;
 import java.util.*;
 
 public class ZigZag {
@@ -12,21 +13,21 @@ public class ZigZag {
         queue.offer(root);
         boolean leftToRight = true;
 
-        while(!queue.isEmpty()) {
-            int size = queue.size();
-            Integer[] level = new Integer[size];
+        while (!queue.isEmpty()) {
+           int size = queue.size();
+           Integer[] level = new Integer[size];
 
-            for (int i = 0; i < size; i++) {
-                Node node = queue.poll();
+           for(int i = 0; i < size; i++) {
+               Node node = queue.poll();
 
-                int index = leftToRight ? i : (size - 1 - i);
-                level[index] = node.data;
+               int index = leftToRight ? i : (size - 1 - i);
+               level[index] = node.data;
 
-                if (node.left != null) queue.offer(node.left);
-                if (node.right != null) queue.offer(node.right);
-            }
-            result.add(Arrays.asList(level));
-            leftToRight = !leftToRight;
+               if (node.left != null) queue.offer(node.left);
+               if (node.right != null) queue.offer(node.right);
+           }
+           result.add(Arrays.asList(level));
+           leftToRight = !leftToRight;
         }
         return result;
     }
