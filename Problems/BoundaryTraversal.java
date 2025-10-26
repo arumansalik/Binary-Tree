@@ -4,61 +4,54 @@ import java.util.*;
 public class BoundaryTraversal {
     public static List<Integer> boundaryTraversal(Node root) {
         List<Integer> res = new ArrayList<>();
-        if (root == null) return res;
+        if(root == null) return res;
 
-        // Root node (only if it's not a leaf)
-        if (!isLeaf(root))
+        if(!isLeaf(root))
             res.add(root.data);
 
-        // 1️⃣ Add left boundary
         addLeftBoundary(root.left, res);
 
-        // 2️⃣ Add leaf nodes
         addLeaves(root, res);
 
-        // 3️⃣ Add right boundary
         addRightBoundary(root.right, res);
 
         return res;
     }
 
-    // Helper to check if a node is leaf
-    private static boolean isLeaf(Node node) {
-        return node != null && node.left == null && node.right == null;
+    private static boolean isLeaf(Node root) {
+        return root != null && root.left != null && root.right != null;
     }
 
-    // Add left boundary (top-down, excluding leaves)
-    private static void addLeftBoundary(Node node, List<Integer> res) {
-        while (node != null) {
-            if (!isLeaf(node))
-                res.add(node.data);
-            node = (node.left != null) ? node.left : node.right;
+    private static void addLeftBoundary(Node root, List<Integer> res) {
+        while(root != null) {
+            if(!isLeaf(root))
+                res.add(root.data);
+            root = (root.left != null) ? root.left : root.right;
         }
     }
 
-    // Add all leaf nodes (left-to-right)
-    private static void addLeaves(Node node, List<Integer> res) {
-        if (node == null) return;
-        if (isLeaf(node)) {
-            res.add(node.data);
+    private static void addLeaves(Node root, List<Integer> res) {
+        if(root == null) return;
+        if(isLeaf(root)) {
+            res.add(root.data);
             return;
         }
-        addLeaves(node.left, res);
-        addLeaves(node.right, res);
+        addLeaves(root.left, res);
+        addLeaves(root.right, res);
     }
 
-    // Add right boundary (bottom-up, excluding leaves)
-    private static void addRightBoundary(Node node, List<Integer> res) {
+    private static void addRightBoundary(Node root, List<Integer> res) {
         Stack<Integer> st = new Stack<>();
-        while (node != null) {
-            if (!isLeaf(node))
-                st.push(node.data);
-            node = (node.right != null) ? node.right : node.left;
+        while(root != null) {
+            if(!isLeaf(root))
+                st.push(root.data);
+            root = (root.right != null) ? root.right : root.left;
         }
-        // Add in reverse order
-        while (!st.isEmpty())
+        while (!st.isEmpty()) {
             res.add(st.pop());
+        }
     }
+
 
     // Driver code
     public static void main(String[] args) {
