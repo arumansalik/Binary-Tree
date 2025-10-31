@@ -59,5 +59,5 @@ public class BurnBinaryTree {
 
         int time = minTime(root, target);
         System.out.println("🔥 Minimum time to burn the tree: " + time);
-    }
+        }
 }
