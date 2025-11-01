@@ -25,6 +25,33 @@ public class SerializeDeserializeTree {
         return res.toString();
     }
 
+    public static Node deserialize(String data) {
+        if (data.equals("")) return null;
+
+        String[] values = data.split(" ");
+        Queue<Node> queue = new LinkedList<>();
+
+        Node root = new Node(Integer.parseInt(values[0]));
+        queue.add(root);
+
+        for (int i = 1; i < values.length; i++) {
+            Node parent = queue.poll();
+
+            if(!values[i].equals("n")) {
+                Node left = new Node(Integer.parseInt(values[i]));
+                parent.left = left;
+                queue.add(left);
+            }
+
+            if(!values[++i].equals("n")) {
+                Node right = new Node(Integer.parseInt(values[i]));
+                parent.right = right;
+                queue.add(right);
+            }
+        }
+        return root;
+    }
+
     public static void main(String[] args) {
         // Build the tree
         Node root = new Node(1);
@@ -35,5 +62,8 @@ public class SerializeDeserializeTree {
 
         String data = serialize(root);
         System.out.println("Serialized Tree: " + data);
+
+        Node newRoot = deserialize(data);
+        System.out.println("Deserialization successful: " + (newRoot != null));
     }
 }
