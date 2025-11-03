@@ -2,38 +2,36 @@ package Problems;
 
 public class CountNodesInBinaryTree {
     public static int countNodes(Node root) {
-        if (root == null) return 0;
+        if(root == null) return 0;
 
         int leftHeight = getLeftHeight(root);
         int rightHeight = getRightHeight(root);
 
-        // If left and right subtree heights are same -> perfect binary tree
-        if (leftHeight == rightHeight) {
-            // For a perfect binary tree, total nodes = 2^height - 1
+        if(leftHeight == rightHeight) {
             return (1 << leftHeight) - 1;
         }
 
-        // Otherwise, recursively count nodes in left + right + root
         return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
-    private static int getLeftHeight(Node node) {
+    public static int getLeftHeight(Node node) {
         int height = 0;
-        while (node != null) {
+        while(node != null) {
             height++;
             node = node.left;
         }
         return height;
     }
 
-    private static int getRightHeight(Node node) {
+    public static int getRightHeight(Node node) {
         int height = 0;
-        while (node != null) {
+        while(node != null) {
             height++;
             node = node.right;
         }
         return height;
     }
+
     public static void main(String[] args) {
         // Create a sample complete binary tree:
         //
