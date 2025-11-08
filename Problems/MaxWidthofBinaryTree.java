@@ -11,9 +11,15 @@ class Pair1<U, V> {
         this.value = value;
     }
 
-    public U getKey() { return key; }
-    public V getValue() { return value; }
+    public U getKey() {
+        return key;
+    }
+
+    public V getValue() {
+        return value;
+    }
 }
+
 
 public class MaxWidthofBinaryTree {
     public static int widthOfBinaryTree(Node root) {
@@ -31,22 +37,22 @@ public class MaxWidthofBinaryTree {
             for (int i = 0; i < size; i++) {
                 Pair1<Node, Integer> p = q.poll();
                 Node node = p.getKey();
-                int currIndex = p.getValue() - minIndex;
+                int currIndex = p.getValue();
 
                 if (i == 0) first = currIndex;
                 if (i == size - 1) last = currIndex;
 
                 if (node.left != null)
                     q.offer(new Pair1<>(node.left, 2 * currIndex + 1));
-                if (node.right != null)
+                if (node.right != null) {
                     q.offer(new Pair1<>(node.right, 2 * currIndex + 2));
+                }
             }
-
             maxWidth = Math.max(maxWidth, last - first + 1);
         }
-
         return maxWidth;
     }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(3);
@@ -58,5 +64,4 @@ public class MaxWidthofBinaryTree {
         int width = widthOfBinaryTree(root);
         System.out.println("Maximum width of binary tree: " + width);
     }
-
 }
