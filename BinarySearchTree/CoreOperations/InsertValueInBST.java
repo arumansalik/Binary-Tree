@@ -22,6 +22,13 @@ public class InsertValueInBST {
         return root;
     }
 
+    void inOrder(Node root) {
+        if(root == null) return;
+        inOrder(root.left);
+        System.out.print(root.data + " ");
+        inOrder(root.right);
+    }
+
     public static void main(String[] args) {
         InsertValueInBST inBST = new InsertValueInBST();
         Node root = null;
@@ -30,5 +37,9 @@ public class InsertValueInBST {
         for(int val : values) {
             root = inBST.insert(root, val);
         }
+
+        System.out.print("InOrder Traversal: ");
+        inBST.inOrder(root);
+        System.out.println();
     }
 }
