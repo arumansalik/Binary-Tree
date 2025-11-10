@@ -20,4 +20,16 @@ public class ValidateBST {
         if(node.data <= min || node.data >= max) return false;
         return helper(node.left, min, node.data) && helper(node.right, node.data, max);
     }
+
+    public static void main(String[] args) {
+        Node root = new Node(5);
+        root.left = new Node(3);
+        root.right = new Node(7);
+        root.left.left = new Node(2);
+        root.left.right = new Node(4);
+        root.right.right = new Node(8);
+
+        ValidateBST valiBST = new ValidateBST();
+        System.out.println(valiBST.isValidateBST(root));
+    }
 }
